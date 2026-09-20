@@ -33,6 +33,19 @@ export default function CommercialPage() {
         eyebrow="Commercial & contractors"
         title="Experienced Crews. Jobsite Ready."
         lede="Commercial painting for general contractors, builders, developers, and property managers."
+        media={
+          <FadeIn delay={140} className="overflow-hidden rounded-xl bg-cream">
+            <Image
+              src="/images/Gymnasium.png"
+              alt="Freshly painted Gymnasium 1 hallway with blue cinder block walls and mint double doors"
+              width={711}
+              height={499}
+              className="h-auto w-full object-cover"
+              preload
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          </FadeIn>
+        }
       >
         <p className="mt-6 max-w-2xl text-base leading-8 text-stone sm:text-lg">
           Commercial and construction projects need more than a good finish.
@@ -43,55 +56,7 @@ export default function CommercialPage() {
         <div className="mt-8">
           <EstimateLink>Invite CPS to Bid</EstimateLink>
         </div>
-      </PageIntro>
-
-      <section className="scroll-mt-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-14">
-          <FadeIn>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-sage">
-              Commercial & contractors
-            </p>
-            <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
-              Built for Homeowners. Experienced With Contractors.
-            </h2>
-            <p className="mt-5 font-display text-xl leading-snug text-forest sm:text-2xl">
-              Reliable. Professional. On schedule.
-            </p>
-            <p className="mt-6 text-base leading-8 text-stone sm:text-lg">
-              CPS paints for general contractors, builders, developers, and
-              property managers throughout Calgary and surrounding communities.
-              Crews arrive jobsite ready, with the training and coverage
-              professional projects expect.
-            </p>
-            <div className="mt-8">
-              <EstimateLink>Invite CPS to Bid</EstimateLink>
-            </div>
-          </FadeIn>
-          <FadeIn delay={140} className="overflow-hidden rounded-xl bg-cream">
-            <Image
-              src="/images/painter-at-work.jpg"
-              alt="Professional painter rolling a clean coat on an interior wall"
-              width={1600}
-              height={1067}
-              className="h-auto w-full object-cover"
-            />
-          </FadeIn>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
-        <FadeIn>
-          <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
-            Built for professional jobsites
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-stone sm:text-lg">
-            We understand site coordination, project schedules, and arriving
-            prepared to work safely. Invite CPS to bid on commercial painting,
-            renovations, tenant improvements, multi-family, new construction, and
-            basement developments.
-          </p>
-        </FadeIn>
-        <div className="mt-10 flex flex-wrap gap-3">
+        <div className="mt-8 flex max-w-2xl flex-wrap gap-3">
           {commercialServices.map((item) => (
             <span
               key={item}
@@ -101,7 +66,7 @@ export default function CommercialPage() {
             </span>
           ))}
         </div>
-      </section>
+      </PageIntro>
 
       <section className="border-t border-line bg-cream/70">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:gap-14">

@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Fragment } from "react";
 import { ContactSection } from "@/components/ContactSection";
 import { EstimateLink, ScrollToHash } from "@/components/EstimateLink";
 import { FadeIn } from "@/components/FadeIn";
+import { Faq } from "@/components/Faq";
+import { JsonLd } from "@/components/JsonLd";
 import { PaintHero } from "@/components/PaintHero";
+import { faqSchema } from "@/lib/schema";
 import {
   owners,
   processSteps,
   projects,
   residentialServices,
   site,
-  stats,
   testimonials,
 } from "@/lib/site";
 
@@ -18,23 +21,85 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+const processDesktopSlots = [
+  "lg:col-start-1 lg:row-start-1",
+  "lg:col-start-3 lg:row-start-1",
+  "lg:col-start-5 lg:row-start-1",
+  "lg:col-start-5 lg:row-start-3",
+  "lg:col-start-3 lg:row-start-3",
+  "lg:col-start-1 lg:row-start-3",
+] as const;
+
+function ProcessArrow({
+  direction,
+  className = "",
+}: {
+  direction: "right" | "left" | "down";
+  className?: string;
+}) {
+  const isDown = direction === "down";
+
+  return (
+    <span aria-hidden="true" className={`text-forest ${className}`}>
+      <svg
+        viewBox={isDown ? "0 0 24 48" : "0 0 48 24"}
+        className={isDown ? "h-12 w-6" : "h-6 w-12"}
+        fill="none"
+      >
+        {isDown ? (
+          <>
+            <path
+              d="M12 4v23"
+              stroke="currentColor"
+              strokeWidth="3.25"
+              strokeLinecap="round"
+            />
+            <path d="M4.5 25.5 12 42 19.5 25.5Z" fill="currentColor" />
+          </>
+        ) : direction === "left" ? (
+          <>
+            <path
+              d="M44 12H21"
+              stroke="currentColor"
+              strokeWidth="3.25"
+              strokeLinecap="round"
+            />
+            <path d="M22.5 4.5 6 12l16.5 7.5Z" fill="currentColor" />
+          </>
+        ) : (
+          <>
+            <path
+              d="M4 12h23"
+              stroke="currentColor"
+              strokeWidth="3.25"
+              strokeLinecap="round"
+            />
+            <path d="M25.5 4.5 42 12 25.5 19.5Z" fill="currentColor" />
+          </>
+        )}
+      </svg>
+    </span>
+  );
+}
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={faqSchema} />
       <ScrollToHash />
       <section id="home" className="relative scroll-mt-24 overflow-x-clip bg-white">
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-5 pb-16 pt-10 sm:px-8 sm:pb-20 sm:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:py-10">
           <FadeIn className="max-w-xl">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-sage">
-              Proudly Serving Calgary and Surrounding Communities
-            </p>
-            <h1 className="mt-4 font-display text-[2.35rem] leading-[1.08] text-ink sm:text-5xl lg:text-[3.5rem]">
+            <h1 className="font-display text-[2.35rem] leading-[1.08] text-ink sm:text-5xl lg:text-[3.5rem]">
               Calgary Painters
               <br />
               You Can Count On
             </h1>
+            <p className="mt-5 font-display text-xl leading-snug text-forest sm:text-2xl">
+              $0 Deposit. Clear Communication. Quality Painting.
+            </p>
             <p className="mt-6 max-w-md text-base leading-7 text-stone sm:text-lg">
-              Professional residential painting that gives your home a fresh,
+              Professional residential and exterior painting that gives your home a fresh,
               beautiful finish.
             </p>
             <div className="mt-8">
@@ -50,21 +115,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="border-t border-line">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-5 py-10 sm:flex-row sm:items-stretch sm:justify-center sm:gap-10 sm:px-8 sm:py-12">
-          {stats.map((stat, index) => (
-            <FadeIn
-              key={stat.label}
-              delay={index * 80}
-              className="w-full max-w-sm rounded-xl border border-line bg-cream/70 px-5 py-8 text-center sm:w-[16rem] sm:max-w-none sm:px-6 sm:py-10"
-            >
-              <p className="font-display text-3xl text-forest sm:text-4xl">{stat.value}</p>
-              <p className="mt-2 text-sm leading-6 text-stone">{stat.label}</p>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
       <section id="work" className="scroll-mt-24 border-t border-line bg-cream/70">
         <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
           <FadeIn>
@@ -72,7 +122,7 @@ export default function Home() {
               Our work
             </p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
-              Recent Projects
+              Recent House Painting Projects in Calgary
             </h2>
           </FadeIn>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -101,20 +151,24 @@ export default function Home() {
               </FadeIn>
             ))}
           </div>
-          <div
-            id="residential"
-            className="mt-12 grid scroll-mt-24 gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {residentialServices.map((service, index) => (
-              <FadeIn
-                key={service.title}
-                delay={index * 80}
-                className="rounded-xl border border-line bg-white px-5 py-6"
-              >
-                <h3 className="font-display text-2xl text-ink">{service.title}</h3>
-                <p className="mt-3 text-base leading-7 text-stone">{service.body}</p>
-              </FadeIn>
-            ))}
+          <div id="residential" className="mt-16 scroll-mt-24">
+            <FadeIn>
+              <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
+                Residential Painting Services
+              </h2>
+            </FadeIn>
+            <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {residentialServices.map((service, index) => (
+                <FadeIn
+                  key={service.title}
+                  delay={index * 80}
+                  className="rounded-xl border border-line bg-white px-5 py-6"
+                >
+                  <h3 className="font-display text-2xl text-ink">{service.title}</h3>
+                  <p className="mt-3 text-base leading-7 text-stone">{service.body}</p>
+                </FadeIn>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -126,21 +180,62 @@ export default function Home() {
               Our process
             </p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
-              Here’s What Happens When You Call CPS
+              How Our Painting Process Works
             </h2>
           </FadeIn>
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="relative mt-12 max-w-2xl lg:mt-16 lg:grid lg:max-w-none lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:grid-rows-[1fr_auto_1fr] lg:items-center lg:gap-x-3 lg:gap-y-2">
             {processSteps.map((step, index) => (
-              <FadeIn as="li" key={step.number} delay={index * 80} className="flex gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-forest font-display text-sm text-white">
-                  {step.number}
-                </span>
-                <div>
-                  <h3 className="pt-2 font-display text-2xl text-ink">{step.title}</h3>
-                  <p className="mt-2 text-base leading-7 text-stone">{step.body}</p>
-                </div>
-              </FadeIn>
+              <Fragment key={step.number}>
+                <FadeIn
+                  as="li"
+                  delay={index * 80}
+                  className={`relative flex gap-5 pb-2 lg:flex-col lg:items-center lg:gap-0 lg:px-3 lg:pb-0 lg:text-center ${processDesktopSlots[index]}`}
+                >
+                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-display text-base text-white">
+                    {step.number}
+                  </span>
+                  <div className="pt-1.5 lg:pt-4">
+                    <h3 className="font-display text-2xl text-ink">{step.title}</h3>
+                    <p className="mt-2 text-base leading-7 text-stone">{step.body}</p>
+                  </div>
+                </FadeIn>
+                {index < processSteps.length - 1 ? (
+                  <li aria-hidden="true" className="flex justify-start py-3 pl-3 lg:hidden">
+                    <ProcessArrow direction="down" />
+                  </li>
+                ) : null}
+              </Fragment>
             ))}
+            <li
+              aria-hidden="true"
+              className="hidden lg:col-start-2 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
+            >
+              <ProcessArrow direction="right" />
+            </li>
+            <li
+              aria-hidden="true"
+              className="hidden lg:col-start-4 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
+            >
+              <ProcessArrow direction="right" />
+            </li>
+            <li
+              aria-hidden="true"
+              className="hidden lg:col-start-5 lg:row-start-2 lg:flex lg:items-center lg:justify-center lg:py-3"
+            >
+              <ProcessArrow direction="down" />
+            </li>
+            <li
+              aria-hidden="true"
+              className="hidden lg:col-start-4 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
+            >
+              <ProcessArrow direction="left" />
+            </li>
+            <li
+              aria-hidden="true"
+              className="hidden lg:col-start-2 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
+            >
+              <ProcessArrow direction="left" />
+            </li>
           </ol>
         </div>
       </section>
@@ -156,9 +251,6 @@ export default function Home() {
             <h2 className="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl">
               Local Experience. Personal Accountability.
             </h2>
-            <p className="mt-5 font-display text-xl leading-snug text-forest sm:text-2xl">
-              {site.tagline}
-            </p>
             <p className="mt-6 text-base leading-8 text-stone sm:text-lg">
               CPS is locally owned and owner operated. Lou and Ray are both Red
               Seal Journeyperson Painters, with more than 70 years of combined
@@ -230,6 +322,8 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
+
+      <Faq />
     </>
   );
 }

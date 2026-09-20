@@ -242,7 +242,7 @@ export function ContactForm() {
             rows={4}
             value={details}
             onChange={(event) => setDetails(event.target.value)}
-            className={`${fieldClass} min-h-[7.5rem] resize-y border-line focus:border-forest`}
+            className={`${fieldClass} unbounded-scroll h-[7.5rem] resize-none border-line focus:border-forest`}
           />
         </label>
       </div>

@@ -15,14 +15,13 @@ export function ContactSection() {
             Tell Us About Your Project.
           </h2>
           <p className="mt-5 max-w-md font-display text-xl leading-snug text-forest sm:text-2xl">
-            One room or the whole house — you’re still our customer.
+            Proudly Serving Calgary and Surrounding Communities
           </p>
           <p className="mt-6 max-w-md text-base leading-8 text-stone sm:text-lg">
             Whether you’re repainting one room, your whole home, or planning a
-            commercial project, CPS will review the details and contact you to
+            commercial project, we will review the details and contact you to
             arrange the next step.
           </p>
-          <p className="mt-6 font-display text-lg text-ink">{site.tagline}</p>
           <address className="mt-8 space-y-1 text-base not-italic leading-7 text-stone">
             <p>{site.city}</p>
             <p>

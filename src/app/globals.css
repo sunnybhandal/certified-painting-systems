@@ -40,6 +40,28 @@ button {
   color: #ffffff;
 }
 
+.unbounded-scroll {
+  overflow-y: auto;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #c4bfb4 transparent;
+}
+
+.unbounded-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.unbounded-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.unbounded-scroll::-webkit-scrollbar-thumb {
+  background: #c4bfb4;
+  border-radius: 999px;
+}
+
 .select-scroll {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;

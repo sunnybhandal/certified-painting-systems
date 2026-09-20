@@ -1,4 +1,9 @@
-import { communities, site } from "@/lib/site";
+import { communities, faqs, site } from "@/lib/site";
+
+function faqAnswerText(item: (typeof faqs)[number]) {
+  const linkLabel = "link" in item && item.link ? item.link.label : "";
+  return item.answer.replace("{link}", linkLabel).replace("{phone}", site.phone);
+}
 
 export const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -12,7 +17,6 @@ export const localBusinessSchema = {
   image: `${site.url}/images/interior-living.jpg`,
   description:
     "Calgary painters specializing in residential interior and exterior painting, with commercial and contractor painting across Calgary and surrounding communities.",
-  slogan: site.tagline,
   priceRange: "$$",
   currenciesAccepted: "CAD",
   paymentAccepted: "Cash, Cheque, E-Transfer",
@@ -83,30 +87,12 @@ export const localBusinessSchema = {
 export const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Do you paint homes in Calgary?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Residential painting is our focus. CPS paints interiors, exteriors, renovations, and whole-home repaints for homeowners across Calgary and nearby communities.",
-      },
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faqAnswerText(item),
     },
-    {
-      "@type": "Question",
-      name: "Do you require a deposit?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "No. Certified Painting Systems has never required homeowners to pay a deposit before work begins.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Do you take on commercial or contractor work?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. CPS paints for general contractors, developers, and property managers throughout Calgary and surrounding communities.",
-      },
-    },
-  ],
-} as const;
+  })),
+};

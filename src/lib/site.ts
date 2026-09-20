@@ -2,7 +2,6 @@ export const site = {
   name: "Certified Painting Systems",
   legalName: "Certified Painting Systems Ltd",
   shortName: "CPS",
-  tagline: "One Customer at a Time… ON TIME!",
   phone: "403-813-5985",
   phoneHref: "tel:+14038135985",
   email: "CPSLouRay@gmail.com",
@@ -17,8 +16,8 @@ export const site = {
 export const navLinks = [
   { href: "/#work", label: "Our Work" },
   { href: "/#process", label: "Our Process" },
+  { href: "/#estimate", label: "Contact" },
   { href: "/#about", label: "About" },
-  { href: "/#testimonials", label: "Testimonials" },
   { href: "/commercial", label: "Commercial" },
 ] as const;
 
@@ -67,88 +66,76 @@ export const promises = [
 
 export const residentialServices = [
   {
-    title: "Interior Painting",
+    title: "Interior House Painting",
     body: "Walls, ceilings, trim, doors, and complete home repaints.",
   },
   {
-    title: "Exterior Painting",
+    title: "Exterior House Painting",
     body: "Beautiful, durable results that stand up to Calgary’s climate.",
   },
   {
-    title: "Renovations",
-    body: "Basements, additions, and remodeled spaces that need a clean finish.",
-  },
-  {
-    title: "Feature Rooms",
-    body: "Bedrooms, offices, great rooms, and the spaces you use every day.",
-  },
-  {
-    title: "Move-In / Move-Out",
+    title: "Move-In and Move-Out Painting",
     body: "Refresh a home before you move in, or get it ready for sale.",
-  },
-  {
-    title: "Whole-Home Repaints",
-    body: "Professional scheduling and project management from start to finish.",
   },
 ] as const;
 
 export const processSteps = [
   {
-    number: "01",
-    title: "Estimate",
+    number: "1",
+    title: "Free Painting Estimate",
     body: "We meet with you and provide a clear estimate. No deposit required.",
   },
   {
-    number: "02",
-    title: "Schedule",
+    number: "2",
+    title: "Project Scheduling",
     body: "We agree on a start date that works for you.",
   },
   {
-    number: "03",
-    title: "Prepare",
+    number: "3",
+    title: "Home Preparation",
     body: "Floors, furniture, and surfaces are protected.",
   },
   {
-    number: "04",
-    title: "Paint",
+    number: "4",
+    title: "Professional Painting",
     body: "Experienced professionals complete your project.",
   },
   {
-    number: "05",
-    title: "Walkthrough",
+    number: "5",
+    title: "Final Walkthrough",
     body: "We review the completed work with you.",
   },
   {
-    number: "06",
-    title: "Payment",
+    number: "6",
+    title: "Payment After Completion",
     body: "Now you pay us.",
   },
 ] as const;
 
 export const projects = [
   {
-    title: "Calgary Interior Repaint",
+    title: "Calgary Interior House Painting",
     location: "Calgary, AB",
     summary: "A modern home transformation with fresh interior finishes.",
     image: "/images/interior-living.jpg",
     alt: "Freshly painted modern living room interior in Calgary",
   },
   {
-    title: "Chestermere Exterior",
+    title: "Chestermere Exterior House Painting",
     location: "Chestermere, AB",
     summary: "Full exterior repaint built for prairie weather.",
     image: "/images/exterior-home.jpg",
     alt: "Freshly painted house exterior in Chestermere near Calgary",
   },
   {
-    title: "Whole-Home Repaint",
+    title: "Calgary Whole-Home Interior Painting",
     location: "Calgary, AB",
     summary: "Clean, modern interiors from entry to bedrooms.",
     image: "/images/interior-bright.jpg",
     alt: "Bright whole-home interior painting project in Calgary",
   },
   {
-    title: "Modernized Fuel Station",
+    title: "Calgary Commercial Exterior Painting",
     location: "Calgary Area",
     summary: "Commercial exterior painting with durable, high-traffic finishes.",
     image: "/images/commercial-exterior.jpg",
@@ -206,22 +193,11 @@ export const safetyCredentials = [
   "Insured",
 ] as const;
 
-export const projectTypes = [
-  "Interior Painting",
-  "Exterior Painting",
-  "Whole-home repaint",
-  "Renovation / Basement",
-  "Commercial / Contractor",
-] as const;
+export const projectTypes = ["Residential", "Commercial"] as const;
 
 export const contactMethods = ["Phone", "Email", "Text"] as const;
 
 export const faqs = [
-  {
-    question: "Do you paint homes in Calgary?",
-    answer:
-      "Yes. Residential painting is our focus. CPS paints interiors, exteriors, renovations, and whole-home repaints for homeowners across Calgary and nearby communities including Airdrie, Chestermere, Cochrane, Okotoks, and Langdon.",
-  },
   {
     question: "Do you require a deposit?",
     answer:
@@ -233,20 +209,20 @@ export const faqs = [
       "We offer interior painting, exterior painting, basement and renovation finishing, feature rooms, move-in and move-out refreshes, and whole-home repaints. We also paint for general contractors, builders, and property managers.",
   },
   {
+    question: "Do I need to move furniture before you paint?",
+    answer:
+      "No. Floors, furniture, and surfaces are protected as part of the job. We’ll work around your schedule and put things back when we’re done.",
+  },
+  {
     question: "Do you take on commercial or contractor work?",
     answer:
       "Yes. After residential work, CPS regularly paints for general contractors, developers, and property managers — including tenant improvements, multi-family, new construction, and basement developments. Invite us to bid on your next project.",
   },
   {
-    question: "How do I get a painting estimate in Calgary?",
+    question: "How do I get an estimate?",
     answer:
       "Fill out our {link} or call {phone}. We’ll review your project and contact you to arrange the next step. Estimates are free, and there’s no deposit if you move ahead.",
     link: { href: "/#estimate", label: "free estimate form" },
-  },
-  {
-    question: "Are Lou and Ray involved in the work?",
-    answer:
-      "CPS is locally owned and owner operated. Lou and Ray are both Red Seal Journeyperson Painters with more than 70 years of combined experience, and they stay accountable from estimate through completion.",
   },
   {
     question: "What areas do you serve?",

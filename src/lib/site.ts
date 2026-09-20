@@ -115,28 +115,24 @@ export const processSteps = [
 export const projects = [
   {
     title: "Calgary Interior House Painting",
-    location: "Calgary, AB",
     summary: "A modern home transformation with fresh interior finishes.",
     image: "/images/interior-living.jpg",
     alt: "Freshly painted modern living room interior in Calgary",
   },
   {
     title: "Chestermere Exterior House Painting",
-    location: "Chestermere, AB",
     summary: "Full exterior repaint built for prairie weather.",
     image: "/images/exterior-home.jpg",
     alt: "Freshly painted house exterior in Chestermere near Calgary",
   },
   {
-    title: "Calgary Whole-Home Interior Painting",
-    location: "Calgary, AB",
+    title: "Whole-Home Interior Painting",
     summary: "Clean, modern interiors from entry to bedrooms.",
     image: "/images/interior-bright.jpg",
     alt: "Bright whole-home interior painting project in Calgary",
   },
   {
-    title: "Calgary Commercial Exterior Painting",
-    location: "Calgary Area",
+    title: "Commercial Exterior Painting",
     summary: "Commercial exterior painting with durable, high-traffic finishes.",
     image: "/images/commercial-exterior.jpg",
     alt: "Commercial exterior painting on a high-traffic building",

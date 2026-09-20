@@ -142,10 +142,7 @@ export default function Home() {
                   />
                 </div>
                 <div className="px-5 py-5">
-                  <p className="text-xs uppercase tracking-[0.14em] text-sage">
-                    {project.location}
-                  </p>
-                  <h3 className="mt-2 font-display text-2xl text-ink">{project.title}</h3>
+                  <h3 className="font-display text-2xl text-ink">{project.title}</h3>
                   <p className="mt-2 text-base leading-7 text-stone">{project.summary}</p>
                 </div>
               </FadeIn>

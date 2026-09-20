@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Fragment } from "react";
 import { ContactSection } from "@/components/ContactSection";
 import { EstimateLink, ScrollToHash } from "@/components/EstimateLink";
 import { FadeIn } from "@/components/FadeIn";
@@ -180,60 +179,68 @@ export default function Home() {
               How Our Painting Process Works
             </h2>
           </FadeIn>
-          <ol className="relative mt-12 max-w-2xl lg:mt-16 lg:grid lg:max-w-none lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:grid-rows-[1fr_auto_1fr] lg:items-center lg:gap-x-3 lg:gap-y-2">
-            {processSteps.map((step, index) => (
-              <Fragment key={step.number}>
-                <FadeIn
-                  as="li"
-                  delay={index * 80}
-                  className={`relative flex gap-5 pb-2 lg:flex-col lg:items-center lg:gap-0 lg:px-3 lg:pb-0 lg:text-center ${processDesktopSlots[index]}`}
-                >
-                  <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-display text-base text-white">
-                    {step.number}
-                  </span>
-                  <div className="pt-1.5 lg:pt-4">
-                    <h3 className="font-display text-2xl text-ink">{step.title}</h3>
-                    <p className="mt-2 text-base leading-7 text-stone">{step.body}</p>
-                  </div>
-                </FadeIn>
-                {index < processSteps.length - 1 ? (
-                  <li aria-hidden="true" className="flex justify-start py-3 pl-3 lg:hidden">
-                    <ProcessArrow direction="down" />
+          <FadeIn delay={80}>
+            <ol className="relative mt-12 max-w-2xl lg:mt-16 lg:grid lg:max-w-none lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:grid-rows-[1fr_auto_1fr] lg:items-center lg:gap-x-3 lg:gap-y-2">
+              {processSteps.map((step, index) => {
+                const isLast = index === processSteps.length - 1;
+
+                return (
+                  <li
+                    key={step.number}
+                    className={`relative grid grid-cols-[2.5rem_minmax(0,1fr)] items-start gap-x-4 lg:flex lg:flex-col lg:items-center lg:gap-0 lg:px-3 lg:text-center ${
+                      isLast ? "" : "pb-8"
+                    } lg:pb-0 ${processDesktopSlots[index]}`}
+                  >
+                    {isLast ? null : (
+                      <span
+                        aria-hidden="true"
+                        className="absolute bottom-0 left-5 top-10 w-px -translate-x-1/2 bg-forest/25 lg:hidden"
+                      />
+                    )}
+                    <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-forest font-display text-base text-white">
+                      {step.number}
+                    </span>
+                    <div className="min-w-0 pt-1 lg:pt-4">
+                      <h3 className="font-display text-2xl leading-snug text-ink">
+                        {step.title}
+                      </h3>
+                      <p className="mt-2 text-base leading-7 text-stone">{step.body}</p>
+                    </div>
                   </li>
-                ) : null}
-              </Fragment>
-            ))}
-            <li
-              aria-hidden="true"
-              className="hidden lg:col-start-2 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
-            >
-              <ProcessArrow direction="right" />
-            </li>
-            <li
-              aria-hidden="true"
-              className="hidden lg:col-start-4 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
-            >
-              <ProcessArrow direction="right" />
-            </li>
-            <li
-              aria-hidden="true"
-              className="hidden lg:col-start-5 lg:row-start-2 lg:flex lg:items-center lg:justify-center lg:py-3"
-            >
-              <ProcessArrow direction="down" />
-            </li>
-            <li
-              aria-hidden="true"
-              className="hidden lg:col-start-4 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
-            >
-              <ProcessArrow direction="left" />
-            </li>
-            <li
-              aria-hidden="true"
-              className="hidden lg:col-start-2 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
-            >
-              <ProcessArrow direction="left" />
-            </li>
-          </ol>
+                );
+              })}
+              <li
+                aria-hidden="true"
+                className="hidden lg:col-start-2 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
+              >
+                <ProcessArrow direction="right" />
+              </li>
+              <li
+                aria-hidden="true"
+                className="hidden lg:col-start-4 lg:row-start-1 lg:flex lg:items-center lg:justify-center"
+              >
+                <ProcessArrow direction="right" />
+              </li>
+              <li
+                aria-hidden="true"
+                className="hidden lg:col-start-5 lg:row-start-2 lg:flex lg:items-center lg:justify-center lg:py-3"
+              >
+                <ProcessArrow direction="down" />
+              </li>
+              <li
+                aria-hidden="true"
+                className="hidden lg:col-start-4 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
+              >
+                <ProcessArrow direction="left" />
+              </li>
+              <li
+                aria-hidden="true"
+                className="hidden lg:col-start-2 lg:row-start-3 lg:flex lg:items-center lg:justify-center"
+              >
+                <ProcessArrow direction="left" />
+              </li>
+            </ol>
+          </FadeIn>
         </div>
       </section>
 

@@ -1,0 +1,113 @@
+"use client";
+
+import { useState } from "react";
+import { EstimateLink } from "@/components/EstimateLink";
+import { FadeIn } from "@/components/FadeIn";
+import { faqs, site } from "@/lib/site";
+
+function FaqAnswer({
+  item,
+  className,
+}: {
+  item: (typeof faqs)[number];
+  className: string;
+}) {
+  if ("link" in item && item.link) {
+    const [before, afterPhone] = item.answer.split("{phone}");
+    const [beforeLink, afterLink] = before.split("{link}");
+    const linkClass =
+      "font-medium text-forest underline decoration-line underline-offset-4 hover:decoration-forest";
+
+    return (
+      <p className={className}>
+        {beforeLink}
+        <EstimateLink className={linkClass}>
+          {item.link.label}
+        </EstimateLink>
+        {afterLink}
+        <a href={site.phoneHref} className={linkClass}>
+          {site.phone}
+        </a>
+        {afterPhone}
+      </p>
+    );
+  }
+
+  return <p className={className}>{item.answer}</p>;
+}
+
+export function Faq() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section id="faq" className="scroll-mt-24 border-t border-line">
+      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-24">
+        <FadeIn>
+          <h2 className="font-display text-4xl leading-tight text-ink sm:text-5xl">
+            Frequently Asked Questions
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={120} className="mt-10 divide-y divide-line border-y border-line">
+          {faqs.map((item, index) => {
+            const isOpen = openIndex === index;
+            const panelId = `faq-panel-${index}`;
+            const buttonId = `faq-button-${index}`;
+
+            return (
+              <div key={item.question}>
+                <h3>
+                  <button
+                    id={buttonId}
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className={`flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left text-base font-medium transition-colors duration-300 sm:text-lg ${
+                      isOpen ? "text-forest" : "text-ink"
+                    }`}
+                  >
+                    <span>{item.question}</span>
+                    <span
+                      aria-hidden="true"
+                      className={`shrink-0 text-forest transition-transform duration-300 ease-out ${isOpen ? "rotate-180" : ""}`}
+                    >
+                      <svg
+                        viewBox="0 0 16 16"
+                        className="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path d="M3.5 6 8 10.5 12.5 6" />
+                      </svg>
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <FaqAnswer
+                      item={item}
+                      className={`max-w-2xl pb-5 text-base leading-7 text-stone transition-opacity duration-300 ease-out ${
+                        isOpen ? "opacity-100" : "opacity-0"
+                      }`}
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </FadeIn>
+      </div>
+    </section>
+  );
+}
